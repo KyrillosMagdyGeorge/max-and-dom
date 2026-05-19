@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-gold: #c8a14a;
+  --color-brown: #5a3a22;
+  --color-beige: #f5ecd9;
+  --color-darkred: #7a1f1f;
+}
+
+html,
+body {
+  background-color: #faf5e8;
+  color: #2c1f14;
+}
+
+body {
+  font-family: var(--font-playfair), Georgia, serif;
+  background-image: url('/images/cross-pattern.svg');
+  background-repeat: repeat;
+  background-size: 120px 120px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-cinzel), serif;
+  letter-spacing: 0.04em;
+}
+
+.btn-gold {
+  @apply inline-flex items-center justify-center rounded-md bg-gold px-6 py-3 font-display text-sm uppercase tracking-wider text-white shadow-md transition hover:bg-gold-dark focus:outline-none focus:ring-2 focus:ring-gold/50 disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center rounded-md border border-gold px-6 py-3 font-display text-sm uppercase tracking-wider text-brown transition hover:bg-gold/10;
+}
+
+.card {
+  @apply rounded-lg border border-gold/30 bg-white/80 p-6 shadow-sm backdrop-blur;
+}
+
+.fc {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+.fc .fc-toolbar-title {
+  font-family: var(--font-cinzel), serif;
+  color: var(--color-brown);
+}
+
+.fc .fc-button-primary {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: white;
+}
+
+.fc .fc-button-primary:not(:disabled):hover,
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: #8b6b1f;
+  border-color: #8b6b1f;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: rgba(200, 161, 74, 0.08);
+}
