@@ -35,15 +35,15 @@ export default function BookingForm() {
     e.preventDefault();
     setError(null);
     if (!accepted) {
-      setError('You must accept the rules.');
+      setError('يجب الموافقة على القوانين أولًا.');
       return;
     }
     if (!paymentImage) {
-      setError('Please upload your payment screenshot.');
+      setError('يرجى رفع صورة من إيصال الدفع.');
       return;
     }
     if (nights <= 0) {
-      setError('Check-out must be after check-in.');
+      setError('تاريخ الخروج يجب أن يكون بعد تاريخ الدخول.');
       return;
     }
 
@@ -66,12 +66,12 @@ export default function BookingForm() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => null);
-        throw new Error(data?.error || `Request failed (${res.status})`);
+        throw new Error(data?.error || `فشل الطلب (${res.status})`);
       }
       const data = await res.json();
       router.push(`/booking/success?id=${data.id}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Submission failed');
+      setError(err instanceof Error ? err.message : 'فشل إرسال الطلب');
     } finally {
       setSubmitting(false);
     }
@@ -80,7 +80,7 @@ export default function BookingForm() {
   return (
     <form onSubmit={onSubmit} className="card space-y-5">
       <div className="grid gap-4 md:grid-cols-2">
-        <Field label="Full Name" required>
+        <Field label="الاسم بالكامل" required>
           <input
             className="input"
             value={name}
@@ -88,7 +88,7 @@ export default function BookingForm() {
             required
           />
         </Field>
-        <Field label="Phone" required>
+        <Field label="رقم الهاتف" required>
           <input
             className="input"
             value={phone}
@@ -96,14 +96,14 @@ export default function BookingForm() {
             required
           />
         </Field>
-        <Field label="Church / Parish">
+        <Field label="الكنيسة">
           <input
             className="input"
             value={church}
             onChange={(e) => setChurch(e.target.value)}
           />
         </Field>
-        <Field label="Guests" required>
+        <Field label="عدد الضيوف" required>
           <input
             type="number"
             min={1}
@@ -113,7 +113,7 @@ export default function BookingForm() {
             required
           />
         </Field>
-        <Field label="Check-in" required>
+        <Field label="تاريخ الدخول" required>
           <input
             type="date"
             className="input"
@@ -122,7 +122,7 @@ export default function BookingForm() {
             required
           />
         </Field>
-        <Field label="Check-out" required>
+        <Field label="تاريخ الخروج" required>
           <input
             type="date"
             className="input"
@@ -135,23 +135,23 @@ export default function BookingForm() {
 
       <div className="rounded-md bg-beige p-4 text-sm text-brown">
         <p>
-          <strong>Nights:</strong> {nights}
+          <strong>عدد الليالي:</strong> {nights}
         </p>
         <p>
-          <strong>Total price:</strong> {totalPrice.toLocaleString()} EGP
+          <strong>إجمالي السعر:</strong> {totalPrice.toLocaleString('ar-EG')} جنيه
         </p>
         <p>
-          <strong>Required deposit (25%):</strong>{' '}
-          {deposit.toLocaleString()} EGP
+          <strong>المقدم المطلوب (٢٥٪):</strong>{' '}
+          {deposit.toLocaleString('ar-EG')} جنيه
         </p>
         <p className="mt-2 text-brown/70">
-          Pay the deposit via Instapay to
-          <span className="font-semibold"> 01270177871</span> and upload the
-          screenshot below.
+          ادفع المقدم عن طريق انستاباي على رقم
+          <span className="font-semibold"> 01270177871</span> ثم ارفع صورة من
+          الإيصال بالأسفل.
         </p>
       </div>
 
-      <Field label="Payment Screenshot" required>
+      <Field label="صورة إيصال الدفع" required>
         <input
           type="file"
           accept="image/*"
@@ -168,12 +168,11 @@ export default function BookingForm() {
           className="mt-1"
         />
         <span>
-          I have read and accept the{' '}
+          لقد قرأت وأوافق على{' '}
           <a href="/rules" target="_blank" className="underline text-gold-dark">
-            retreat rules
+            قوانين المقر
           </a>
-          , including the 2000 EGP security deposit and the 25% non-refundable
-          booking deposit.
+          ، بما في ذلك تأمين الـ٢٠٠٠ جنيه ومقدم الحجز ٢٥٪ غير المسترد.
         </span>
       </label>
 
@@ -184,7 +183,7 @@ export default function BookingForm() {
       )}
 
       <button type="submit" className="btn-gold w-full" disabled={submitting}>
-        {submitting ? 'Submitting…' : 'Submit Booking Request'}
+        {submitting ? 'جارٍ الإرسال…' : 'إرسال طلب الحجز'}
       </button>
 
       <style jsx>{`

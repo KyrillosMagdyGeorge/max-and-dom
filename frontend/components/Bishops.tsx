@@ -5,19 +5,19 @@ import { motion } from 'framer-motion';
 
 const bishops = [
   {
-    name: 'H.H. Pope Tawadros II',
-    role: '118th Pope of Alexandria & Patriarch of the See of Saint Mark',
-    image: null,
+    name: 'قداسة البابا تواضروس الثاني',
+    role: 'بابا الإسكندرية وبطريرك الكرازة المرقسية الـ١١٨',
+    image: '/images/pope-tawadros.jpg',
   },
   {
-    name: 'H.G. Anba Makar',
-    role: 'Bishop of Eastern Sharqia & 10th of Ramadan',
+    name: 'نيافة الأنبا مكار',
+    role: 'أسقف الشرقية وعاشر من رمضان',
     image: '/images/bishop-makar.png',
   },
   {
-    name: 'Saints Maximus & Domadius',
-    role: 'Patron Saints of the Retreat Center',
-    image: null,
+    name: 'القديسَين مكسيموس ودوماديوس',
+    role: 'شفيعا المقر',
+    image: '/images/saints-max-dom.jpg',
   },
 ];
 
@@ -26,7 +26,7 @@ export default function Bishops() {
     <section className="mx-auto max-w-6xl px-4 py-16">
       <div className="text-center">
         <h2 className="font-display text-3xl text-brown md:text-4xl">
-          Our Spiritual Fathers
+          آباؤنا الروحيون
         </h2>
         <div className="mx-auto mt-2 h-px w-24 bg-gold" />
       </div>

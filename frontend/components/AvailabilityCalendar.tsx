@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import arLocale from '@fullcalendar/core/locales/ar';
 
 import { api } from '@/lib/api';
 
@@ -52,17 +53,19 @@ export default function AvailabilityCalendar({
   return (
     <div className="card">
       <div className="mb-4 flex flex-wrap items-center gap-4 text-sm">
-        <Legend color="#15803d" label="Available" />
-        <Legend color="#ca8a04" label="Pending" />
-        <Legend color="#b91c1c" label="Booked" />
+        <Legend color="#15803d" label="متاح" />
+        <Legend color="#ca8a04" label="قيد المراجعة" />
+        <Legend color="#b91c1c" label="محجوز" />
       </div>
       {error && <p className="mb-2 text-darkred">{error}</p>}
       {loading ? (
-        <p className="text-brown/70">Loading calendar…</p>
+        <p className="text-brown/70">جارٍ تحميل التقويم…</p>
       ) : (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
+          locale={arLocale}
+          direction="rtl"
           height="auto"
           selectable={selectable}
           selectMirror={selectable}

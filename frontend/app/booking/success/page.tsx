@@ -17,6 +17,12 @@ type Booking = {
 
 export const dynamic = 'force-dynamic';
 
+const STATUS_LABEL: Record<Booking['status'], string> = {
+  pending: 'قيد المراجعة',
+  approved: 'مؤكد',
+  rejected: 'مرفوض',
+};
+
 function SuccessInner() {
   const params = useSearchParams();
   const id = params.get('id');
@@ -33,46 +39,46 @@ function SuccessInner() {
   return (
     <section className="mx-auto max-w-2xl px-4 py-16 text-center">
       <div className="text-4xl text-gold">†</div>
-      <h1 className="mt-4 font-display text-3xl text-brown">Request Received</h1>
+      <h1 className="mt-4 font-display text-3xl text-brown">تم استلام طلبك</h1>
       <p className="mt-4 text-brown/70">
-        Thank you. Your booking is now <strong>pending</strong> review by the
-        admin. You will be contacted once it is approved.
+        شكرًا لك. حجزك الآن <strong>قيد المراجعة</strong> من قِبل الإدارة.
+        سيتم التواصل معك بمجرد الموافقة.
       </p>
 
       {error && <p className="mt-6 text-darkred">{error}</p>}
 
       {booking && (
-        <div className="card mt-8 text-left">
-          <h2 className="font-display text-xl text-brown">Booking Details</h2>
+        <div className="card mt-8 text-right">
+          <h2 className="font-display text-xl text-brown">تفاصيل الحجز</h2>
           <ul className="mt-3 space-y-1 text-sm text-brown/80">
             <li>
-              <strong>Name:</strong> {booking.name}
+              <strong>الاسم:</strong> {booking.name}
             </li>
             <li>
-              <strong>Check-in:</strong>{' '}
-              {new Date(booking.checkIn).toLocaleDateString()}
+              <strong>تاريخ الدخول:</strong>{' '}
+              {new Date(booking.checkIn).toLocaleDateString('ar-EG')}
             </li>
             <li>
-              <strong>Check-out:</strong>{' '}
-              {new Date(booking.checkOut).toLocaleDateString()}
+              <strong>تاريخ الخروج:</strong>{' '}
+              {new Date(booking.checkOut).toLocaleDateString('ar-EG')}
             </li>
             <li>
-              <strong>Deposit Paid:</strong>{' '}
-              {booking.deposit.toLocaleString()} EGP
+              <strong>المقدم المدفوع:</strong>{' '}
+              {booking.deposit.toLocaleString('ar-EG')} جنيه
             </li>
             <li>
-              <strong>Status:</strong>{' '}
-              <span className="capitalize">{booking.status}</span>
+              <strong>الحالة:</strong>{' '}
+              <span>{STATUS_LABEL[booking.status]}</span>
             </li>
           </ul>
 
           {booking.status === 'approved' && booking.qrCode && (
             <div className="mt-6 text-center">
-              <h3 className="font-display text-lg text-brown">Your Entry QR</h3>
+              <h3 className="font-display text-lg text-brown">رمز الدخول الخاص بك</h3>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={booking.qrCode}
-                alt="Entry QR code"
+                alt="رمز الدخول"
                 className="mx-auto mt-4 h-48 w-48"
               />
             </div>
@@ -88,7 +94,7 @@ export default function BookingSuccessPage() {
     <Suspense
       fallback={
         <section className="mx-auto max-w-2xl px-4 py-16 text-center text-brown/70">
-          Loading…
+          جارٍ التحميل…
         </section>
       }
     >

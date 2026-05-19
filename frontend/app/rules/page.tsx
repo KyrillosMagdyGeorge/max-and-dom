@@ -1,40 +1,40 @@
 export const metadata = {
-  title: 'Rules — Awlad El Molok',
+  title: 'القوانين — أولاد الملوك',
 };
 
 const sections = [
   {
-    title: 'Check-in & Check-out',
+    title: 'مواعيد الدخول والخروج',
     items: [
-      'Check-in: 11:00 AM',
-      'Check-out: 9:00 AM',
-      'Day-use: 9:00 AM – 9:00 PM',
+      'الدخول: ١١:٠٠ صباحًا',
+      'الخروج: ٩:٠٠ صباحًا',
+      'اليوم الواحد: من ٩:٠٠ صباحًا حتى ٩:٠٠ مساءً',
     ],
   },
   {
-    title: 'Conduct',
+    title: 'السلوك العام',
     items: [
-      'No smoking anywhere on the premises.',
-      'No alcohol or any intoxicants.',
-      'No loud music; please respect the spiritual atmosphere.',
-      'Modest dress code at all times.',
+      'ممنوع التدخين في كل أنحاء المقر.',
+      'ممنوع تناول الكحول أو أي مسكرات.',
+      'ممنوع تشغيل موسيقى صاخبة — احترامًا للأجواء الروحية.',
+      'الالتزام بالزي المحتشم طوال الوقت.',
     ],
   },
   {
-    title: 'Pool Rules',
+    title: 'قوانين حمام السباحة',
     items: [
-      'Children must be accompanied by an adult at all times.',
-      'No diving or running on wet surfaces.',
-      'Appropriate swimwear is required.',
-      'Pool hours: 9:00 AM – 7:00 PM.',
+      'يجب أن يكون الأطفال برفقة شخص بالغ طوال الوقت.',
+      'ممنوع الغطس أو الجري على الأرضيات المبتلة.',
+      'يجب ارتداء ملابس سباحة لائقة.',
+      'مواعيد السباحة: من ٩:٠٠ صباحًا حتى ٧:٠٠ مساءً.',
     ],
   },
   {
-    title: 'Deposits & Penalties',
+    title: 'العربون والغرامات',
     items: [
-      'Security deposit: 2000 EGP, refundable upon checkout.',
-      'Cleaning penalties apply for any damages or excessive mess.',
-      'Booking deposit: 25% of the total price (non-refundable).',
+      'تأمين ٢٠٠٠ جنيه يُرد عند الخروج.',
+      'تُطبَّق غرامات نظافة في حالة أي تلفيات أو فوضى زائدة.',
+      'مقدم الحجز: ٢٥٪ من إجمالي السعر (غير مسترد).',
     ],
   },
 ];
@@ -44,12 +44,11 @@ export default function RulesPage() {
     <section className="mx-auto max-w-3xl px-4 py-12">
       <header className="mb-8 text-center">
         <h1 className="font-display text-3xl text-brown md:text-4xl">
-          Retreat Rules
+          قوانين المقر
         </h1>
         <div className="mx-auto mt-2 h-px w-24 bg-gold" />
         <p className="mt-4 text-brown/70">
-          To preserve the spiritual nature of our retreat, please read and
-          accept the following rules before booking.
+          للحفاظ على الطابع الروحي للمقر، يُرجى قراءة القوانين التالية والموافقة عليها قبل الحجز.
         </p>
       </header>
 
@@ -57,7 +56,7 @@ export default function RulesPage() {
         {sections.map((s) => (
           <article key={s.title} className="card">
             <h2 className="font-display text-xl text-brown">{s.title}</h2>
-            <ul className="mt-3 list-disc space-y-1 pl-6 text-brown/80">
+            <ul className="mt-3 list-disc space-y-1 pr-6 text-brown/80">
               {s.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -67,7 +66,7 @@ export default function RulesPage() {
       </div>
 
       <div className="mt-8 text-center">
-        <a href="/booking" className="btn-gold">I Accept &amp; Book Now</a>
+        <a href="/booking" className="btn-gold">أوافق وأحجز الآن</a>
       </div>
     </section>
   );
