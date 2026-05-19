@@ -24,8 +24,8 @@ const config: Config = {
         darkred: '#7a1f1f',
       },
       fontFamily: {
-        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
-        display: ['var(--font-cinzel)', 'serif'],
+        serif: ['var(--font-cairo)', 'var(--font-playfair)', 'Georgia', 'serif'],
+        display: ['var(--font-cairo)', 'var(--font-cinzel)', 'serif'],
       },
       backgroundImage: {
         cross: "url('/images/cross-pattern.svg')",

@@ -21,7 +21,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mt-4 font-display text-4xl text-brown md:text-6xl"
         >
-          Awlad El Molok Retreat Center
+          مقر أولاد الملوك
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -29,7 +29,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-4 text-lg italic text-brown/80 md:text-xl"
         >
-          Coptic Orthodox Diocese of Eastern Sharqia &amp; 10th of Ramadan
+          إيبارشية الشرقية وعاشر من رمضان — الكنيسة القبطية الأرثوذكسية
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -37,8 +37,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.4 }}
           className="mx-auto mt-6 max-w-2xl text-base text-brown/70"
         >
-          A place of prayer, quiet, and renewal under the intercession of
-          Saints Maximus &amp; Domadius.
+          مكان للصلاة والهدوء والتجديد الروحي بشفاعة القديسَين مكسيموس ودوماديوس.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -47,10 +46,10 @@ export default function Hero() {
           className="mt-10 flex flex-wrap justify-center gap-4"
         >
           <Link href="/booking" className="btn-gold">
-            Book a Stay
+            احجز الآن
           </Link>
           <Link href="/calendar" className="btn-outline">
-            View Availability
+            عرض المواعيد المتاحة
           </Link>
         </motion.div>
       </div>

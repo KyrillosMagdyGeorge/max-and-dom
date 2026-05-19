@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/calendar', label: 'Calendar' },
-  { href: '/booking', label: 'Book' },
-  { href: '/rules', label: 'Rules' },
+  { href: '/', label: 'الرئيسية' },
+  { href: '/calendar', label: 'التقويم' },
+  { href: '/booking', label: 'احجز' },
+  { href: '/rules', label: 'القوانين' },
 ];
 
 export default function Navbar() {
@@ -17,13 +17,13 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 border-b border-gold/40 bg-beige/95 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <Link href="/" className="font-display text-lg text-brown">
-          <span className="text-gold-dark">†</span> Awlad El Molok
+          <span className="text-gold-dark">†</span> أولاد الملوك
         </Link>
 
         <button
           className="md:hidden text-brown"
           onClick={() => setOpen((o) => !o)}
-          aria-label="Toggle menu"
+          aria-label="القائمة"
         >
           ☰
         </button>
@@ -39,7 +39,7 @@ export default function Navbar() {
                 <Link
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block font-display text-sm uppercase tracking-wider text-brown hover:text-gold-dark"
+                  className="block font-display text-sm tracking-wider text-brown hover:text-gold-dark"
                 >
                   {l.label}
                 </Link>
@@ -49,9 +49,9 @@ export default function Navbar() {
               <Link
                 href="/admin/login"
                 onClick={() => setOpen(false)}
-                className="block font-display text-sm uppercase tracking-wider text-darkred hover:text-brown"
+                className="block font-display text-sm tracking-wider text-darkred hover:text-brown"
               >
-                Admin
+                الإدارة
               </Link>
             </li>
           </ul>

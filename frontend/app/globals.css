@@ -16,15 +16,15 @@ body {
 }
 
 body {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-cairo), var(--font-playfair), Georgia, serif;
   background-image: url('/images/cross-pattern.svg');
   background-repeat: repeat;
   background-size: 120px 120px;
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-cinzel), serif;
-  letter-spacing: 0.04em;
+  font-family: var(--font-cairo), var(--font-cinzel), serif;
+  letter-spacing: 0.02em;
 }
 
 .btn-gold {
@@ -40,11 +40,12 @@ h1, h2, h3, h4 {
 }
 
 .fc {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-cairo), var(--font-playfair), Georgia, serif;
+  direction: ltr;
 }
 
 .fc .fc-toolbar-title {
-  font-family: var(--font-cinzel), serif;
+  font-family: var(--font-cairo), var(--font-cinzel), serif;
   color: var(--color-brown);
 }
 

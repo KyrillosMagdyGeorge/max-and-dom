@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Cinzel, Playfair_Display } from 'next/font/google';
+import { Cinzel, Playfair_Display, Cairo } from 'next/font/google';
 
 import './globals.css';
 import Navbar from '@/components/Navbar';
@@ -17,10 +17,16 @@ const playfair = Playfair_Display({
   weight: ['400', '500', '600', '700'],
 });
 
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  variable: '--font-cairo',
+  weight: ['400', '500', '600', '700'],
+});
+
 export const metadata: Metadata = {
-  title: 'Awlad El Molok Retreat Center',
+  title: 'مقر أولاد الملوك',
   description:
-    'Orthodox Christian retreat center — Coptic Orthodox Diocese of Eastern Sharqia & 10th of Ramadan',
+    'مقر روحي مسيحي أرثوذكسي — إيبارشية الشرقية وعاشر من رمضان',
 };
 
 export default function RootLayout({
@@ -29,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${cinzel.variable} ${playfair.variable}`}>
+    <html lang="ar" dir="rtl" className={`${cinzel.variable} ${playfair.variable} ${cairo.variable}`}>
       <body className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>

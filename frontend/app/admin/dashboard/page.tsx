@@ -24,6 +24,19 @@ type Booking = {
 
 type Tab = 'pending' | 'approved' | 'rejected' | 'calendar';
 
+const TAB_LABEL: Record<Tab, string> = {
+  pending: 'قيد المراجعة',
+  approved: 'مؤكدة',
+  rejected: 'مرفوضة',
+  calendar: 'التقويم',
+};
+
+const STATUS_LABEL: Record<Booking['status'], string> = {
+  pending: 'قيد المراجعة',
+  approved: 'مؤكد',
+  rejected: 'مرفوض',
+};
+
 export default function AdminDashboardPage() {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>('pending');
@@ -42,7 +55,7 @@ export default function AdminDashboardPage() {
       });
       setBookings(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load');
+      setError(err instanceof Error ? err.message : 'فشل تحميل البيانات');
     } finally {
       setLoading(false);
     }
@@ -65,7 +78,7 @@ export default function AdminDashboardPage() {
       setSelected(updated);
       load();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Approval failed');
+      alert(err instanceof Error ? err.message : 'فشل تأكيد الحجز');
     }
   }
 
@@ -78,7 +91,7 @@ export default function AdminDashboardPage() {
       setSelected(null);
       load();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Rejection failed');
+      alert(err instanceof Error ? err.message : 'فشل رفض الحجز');
     }
   }
 
@@ -90,9 +103,9 @@ export default function AdminDashboardPage() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
       <header className="mb-6 flex items-center justify-between">
-        <h1 className="font-display text-3xl text-brown">Admin Dashboard</h1>
+        <h1 className="font-display text-3xl text-brown">لوحة الإدارة</h1>
         <button onClick={logout} className="btn-outline">
-          Logout
+          تسجيل خروج
         </button>
       </header>
 
@@ -101,13 +114,13 @@ export default function AdminDashboardPage() {
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`rounded-t-md px-4 py-2 font-display text-sm uppercase tracking-wider ${
+            className={`rounded-t-md px-4 py-2 font-display text-sm tracking-wider ${
               tab === t
                 ? 'bg-gold text-white'
                 : 'text-brown hover:bg-gold/10'
             }`}
           >
-            {t}
+            {TAB_LABEL[t]}
           </button>
         ))}
       </div>
@@ -119,16 +132,16 @@ export default function AdminDashboardPage() {
           <div className="lg:col-span-1">
             {error && <p className="text-darkred">{error}</p>}
             {loading ? (
-              <p className="text-brown/70">Loading…</p>
+              <p className="text-brown/70">جارٍ التحميل…</p>
             ) : bookings.length === 0 ? (
-              <p className="text-brown/70">No {tab} bookings.</p>
+              <p className="text-brown/70">لا يوجد حجوزات {TAB_LABEL[tab]}.</p>
             ) : (
               <ul className="space-y-2">
                 {bookings.map((b) => (
                   <li key={b._id}>
                     <button
                       onClick={() => setSelected(b)}
-                      className={`w-full rounded-md border px-3 py-2 text-left text-sm ${
+                      className={`w-full rounded-md border px-3 py-2 text-right text-sm ${
                         selected?._id === b._id
                           ? 'border-gold bg-gold/10'
                           : 'border-gold/30 bg-white hover:bg-beige'
@@ -136,11 +149,11 @@ export default function AdminDashboardPage() {
                     >
                       <div className="font-medium text-brown">{b.name}</div>
                       <div className="text-xs text-brown/70">
-                        {new Date(b.checkIn).toLocaleDateString()} →{' '}
-                        {new Date(b.checkOut).toLocaleDateString()}
+                        {new Date(b.checkIn).toLocaleDateString('ar-EG')} ←{' '}
+                        {new Date(b.checkOut).toLocaleDateString('ar-EG')}
                       </div>
                       <div className="text-xs text-brown/60">
-                        {b.guests} guests · {b.deposit.toLocaleString()} EGP
+                        {b.guests} ضيف · {b.deposit.toLocaleString('ar-EG')} جنيه
                       </div>
                     </button>
                   </li>
@@ -157,7 +170,7 @@ export default function AdminDashboardPage() {
                 onReject={() => reject(selected._id)}
               />
             ) : (
-              <p className="text-brown/70">Select a booking to view details.</p>
+              <p className="text-brown/70">اختر حجزًا لعرض التفاصيل.</p>
             )}
           </div>
         </div>
@@ -180,50 +193,50 @@ function BookingDetails({
       <div>
         <h2 className="font-display text-xl text-brown">{booking.name}</h2>
         <p className="text-sm text-brown/70">
-          Created {new Date(booking.createdAt).toLocaleString()}
+          تم الإنشاء في {new Date(booking.createdAt).toLocaleString('ar-EG')}
         </p>
       </div>
 
       <dl className="grid gap-2 text-sm md:grid-cols-2">
-        <Info label="Phone" value={booking.phone} />
-        <Info label="Church" value={booking.church || '—'} />
+        <Info label="رقم الهاتف" value={booking.phone} />
+        <Info label="الكنيسة" value={booking.church || '—'} />
         <Info
-          label="Check-in"
-          value={new Date(booking.checkIn).toLocaleDateString()}
+          label="تاريخ الدخول"
+          value={new Date(booking.checkIn).toLocaleDateString('ar-EG')}
         />
         <Info
-          label="Check-out"
-          value={new Date(booking.checkOut).toLocaleDateString()}
+          label="تاريخ الخروج"
+          value={new Date(booking.checkOut).toLocaleDateString('ar-EG')}
         />
-        <Info label="Guests" value={booking.guests} />
+        <Info label="عدد الضيوف" value={booking.guests} />
         <Info
-          label="Total Price"
-          value={`${booking.totalPrice.toLocaleString()} EGP`}
+          label="إجمالي السعر"
+          value={`${booking.totalPrice.toLocaleString('ar-EG')} جنيه`}
         />
         <Info
-          label="Deposit (25%)"
-          value={`${booking.deposit.toLocaleString()} EGP`}
+          label="المقدم (٢٥٪)"
+          value={`${booking.deposit.toLocaleString('ar-EG')} جنيه`}
         />
-        <Info label="Status" value={booking.status} />
+        <Info label="الحالة" value={STATUS_LABEL[booking.status]} />
       </dl>
 
       <div>
-        <p className="mb-2 text-sm font-medium text-brown">Payment Screenshot</p>
+        <p className="mb-2 text-sm font-medium text-brown">صورة الإيصال</p>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={booking.paymentImage}
-          alt="Payment screenshot"
+          alt="صورة الإيصال"
           className="max-h-80 rounded border border-gold/30"
         />
       </div>
 
       {booking.status === 'approved' && booking.qrCode && (
         <div>
-          <p className="mb-2 text-sm font-medium text-brown">Entry QR</p>
+          <p className="mb-2 text-sm font-medium text-brown">رمز الدخول</p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={booking.qrCode}
-            alt="Entry QR"
+            alt="رمز الدخول"
             className="h-48 w-48 rounded border border-gold/30"
           />
         </div>
@@ -232,13 +245,13 @@ function BookingDetails({
       {booking.status === 'pending' && (
         <div className="flex gap-3">
           <button onClick={onApprove} className="btn-gold">
-            Approve
+            تأكيد
           </button>
           <button
             onClick={onReject}
             className="btn-outline border-darkred text-darkred hover:bg-darkred/10"
           >
-            Reject
+            رفض
           </button>
         </div>
       )}

@@ -24,7 +24,7 @@ export default function AdminLoginPage() {
       saveToken(token);
       router.push('/admin/dashboard');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : 'فشل تسجيل الدخول');
     } finally {
       setLoading(false);
     }
@@ -33,13 +33,13 @@ export default function AdminLoginPage() {
   return (
     <section className="mx-auto max-w-md px-4 py-16">
       <h1 className="text-center font-display text-3xl text-brown">
-        Admin Login
+        دخول الإدارة
       </h1>
       <div className="mx-auto mt-2 h-px w-24 bg-gold" />
       <form onSubmit={onSubmit} className="card mt-8 space-y-4">
         <label className="block">
           <span className="mb-1 block text-sm font-medium text-brown">
-            Username
+            اسم المستخدم
           </span>
           <input
             className="w-full rounded-md border border-gold/50 bg-white px-3 py-2"
@@ -50,7 +50,7 @@ export default function AdminLoginPage() {
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-medium text-brown">
-            Password
+            كلمة المرور
           </span>
           <input
             type="password"
@@ -66,7 +66,7 @@ export default function AdminLoginPage() {
           </p>
         )}
         <button type="submit" className="btn-gold w-full" disabled={loading}>
-          {loading ? 'Signing in…' : 'Sign In'}
+          {loading ? 'جارٍ تسجيل الدخول…' : 'دخول'}
         </button>
       </form>
     </section>
